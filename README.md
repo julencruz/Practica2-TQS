@@ -8,7 +8,7 @@
 **Página web a testear:** [IKEA España](https://www.ikea.com/es/es/)  
 
 **Frameworks i herramientas utilizadas:**
-- Selenium WebDriver
+- Selenium WebDriver (con geckodriver en FireFox)
 - Cucumber (con Gherkin)
 - Java
 
