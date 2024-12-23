@@ -21,17 +21,21 @@ public class generalSteps {
 	WebDriver driver;
 	
 	public void acceptCookies() {
-        // Crear una espera explícita con un tiempo de espera de 10 segundos
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // 10 segundos sin Duration
-        try {
-            // Buscar el botón de aceptación de cookies por su ID
-            WebElement acceptCookiesButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("onetrust-accept-btn-handler")));
-            acceptCookiesButton.click();  // Hacer clic en el botón de aceptar cookies
-            System.out.println("Cookies aceptadas");
-        } catch (Exception e) {
-            System.out.println("No se encontró el botón de cookies o ya se aceptaron.");
-        }
-    }
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));  
+	    
+	    try {
+	        // Buscar el botón de aceptación de cookies por su ID
+	        WebElement acceptCookiesButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("onetrust-accept-btn-handler")));
+	        acceptCookiesButton.click();  // Hacer clic en el botón de aceptar cookies
+	        System.out.println("Cookies aceptadas");
+
+	        // Esperar hasta que el div de cookies desaparezca
+	        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("onetrust-group-container")));
+	        System.out.println("El div de cookies desapareció");
+	    } catch (Exception e) {
+	        System.out.println("No se encontró el botón de cookies o ya se aceptaron.");
+	    }
+	}
 	
 	@Given("el usuario esta en la pagina principal")
 	public void elUsuarioEstaEnLaPaginaPrincipal() {
@@ -43,10 +47,7 @@ public class generalSteps {
 	
 	@When("el usuario haga clic en la barra de busqueda")
 	public void clicBarraBusqueda() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("onetrust-group-container"))); // Esperar hasta que la ventana de cookies desaparezca
-		WebElement searchInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("ikea-search-input")));
-        searchInput.click();  // Hacer clic en el campo de búsqueda
+		driver.findElement(By.id("ikea-search-input")).click();
 	}
 	
 	@And("^el usuario escriba (.*)")
