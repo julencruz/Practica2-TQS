@@ -1,11 +1,13 @@
-# Práctica 2 de Test i Qualitat: UI Testing con Selenium i Cucumber
+# Práctica 2 de Test i Qualitat: UI Testing con Selenium y Cucumber
 
 ## Información General
 **Miembros del grupo:**
 - **Julen Cruz Gómez** (NIU: 1667663)
 - **Igor Ulyanov** (NIU: 1667150)
+
 **Página web a testear:** [IKEA España](https://www.ikea.com/es/es/)  
-**Frameworks i herramientas utilitzades:**
+
+**Frameworks i herramientas utilizadas:**
 - Selenium WebDriver
 - Cucumber (con Gherkin)
 - Java
