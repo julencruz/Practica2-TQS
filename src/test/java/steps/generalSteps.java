@@ -4,9 +4,12 @@ import static org.testng.Assert.assertTrue;
 
 import java.text.Normalizer;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -35,14 +38,14 @@ public class generalSteps {
 
 	        // Esperar hasta que el div de cookies desaparezca
 	        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("onetrust-group-container")));
-	        System.out.println("El div de cookies desapareció");
+	        System.out.println("El div de cookies ha desaparecido");
 
 	        // Esperar a que el campo de búsqueda sea clickeable
 	        wait.until(ExpectedConditions.elementToBeClickable(By.id("ikea-search-input")));
 	        System.out.println("El campo de búsqueda está disponible");
 
 	    } catch (Exception e) {
-	        System.out.println("No se encontró el botón de cookies o ya se aceptaron. Error: " + e.getMessage());
+	        System.out.println("No se encontró el botón de cookies. Error: " + e.getMessage());
 	    }
 	}
 	
@@ -51,6 +54,31 @@ public class generalSteps {
 		driver.quit();
 	}
 	
+	@And("^el usuario selecciona filtro (.*)")
+	public void elUsuarioSeleccionaFiltro(String filtro) throws InterruptedException {
+		System.out.println("Se selecciona filtro " + filtro);
+		Thread.sleep(2000);
+		WebElement filtroBoton = driver.findElement(By.xpath("//span[text()='" + filtro + "']/ancestor::button"));
+        filtroBoton.click();
+	}
+	
+	@And("^el usuario selecciona opción (.*)")
+	public void seleccionarOpcionFiltro(int opcion) {
+	    // Esperar a que el popup sea visible
+		System.out.println("Se seleccionará la " + (opcion+1) +"ª opción del popup");
+	    WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("plp-drop-down")));
+
+	    WebElement fieldset = popup.findElement(By.cssSelector("fieldset"));
+
+	    // Buscar todos los elementos clicables dentro del fieldset
+	    List<WebElement> elements = null;
+	    
+	    elements = fieldset.findElements(By.cssSelector("label.plp-checkbox__wrapper"));
+	    if (elements.isEmpty()) {
+	    	elements = fieldset.findElements(By.cssSelector("input"));
+	    }
+	    elements.get(opcion).click();;
+	}
 	@Given("el usuario esta en la pagina principal")
 	public void elUsuarioEstaEnLaPaginaPrincipal() {
 		System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
@@ -60,7 +88,8 @@ public class generalSteps {
 	}
 	
 	@When("el usuario haga clic en la barra de busqueda")
-	public void clicBarraBusqueda() {
+	public void clicBarraBusqueda() throws InterruptedException {
+		Thread.sleep(1000);
 		driver.findElement(By.id("ikea-search-input")).click();
 		System.out.println("Barra de busqueda clicada");
 	}
@@ -155,6 +184,39 @@ public class generalSteps {
 			}
 		}
 		Assert.assertEquals(encontrado, true);
+	}
+	
+	@Then("^deben estar ordenados (.*)")
+	public void comprobarResultadosOrdenados(int opcion) {
+		System.out.println("comprobarResultadosOrdenados: ");
+	    List<WebElement> products = driver.findElements(By.className("plp-price-module__price"));
+	    List<Float> prices = new ArrayList<>();  // Inicializa la lista de precios
+	    for (WebElement product : products) {
+	    	String precioTexto = product.getText().replaceAll("[^\\d\\, ]","").split(" ")[0].replace(',', '.');
+	    	float precio = Float.parseFloat(precioTexto);
+	    	
+	    	System.out.println("Precio: " + precio);
+
+	        prices.add(precio);
+	    }
+
+	    // Copia la lista de precios para comparar con la lista ordenada
+	    List<Float> pricesOrdenados = new ArrayList<>(prices);
+
+	    // Ordena según la opción
+	    switch (opcion) {
+	        case 1: // Ordenar de menor a mayor
+	            Collections.sort(pricesOrdenados);
+	            break;
+	        case 2: // Ordenar de mayor a menor
+	            Collections.sort(pricesOrdenados, Collections.reverseOrder());
+	            break;
+	        default:
+	            throw new IllegalArgumentException("Opción no válida");
+	    }
+
+	    // Compara la lista original con la lista ordenada
+	    Assert.assertEquals(pricesOrdenados, prices);
 	}
 	
 	@Then("^no deben aparecer resultados")

@@ -7,11 +7,10 @@ Feature: BusquedaFiltrada
     And el usuario haga clic en el icono de buscar
     And el usuario selecciona filtro <filtro>
     And el usuario selecciona opción <opcion>
-    Then se ha buscado <algo>
-    And deben aparecer al menos <valor> numero de productos
+    Then deben estar ordenados <opcion>
     And muere
 
     Examples: 
-      | algo | filtro | opcion | valor |
-      | vaso | Color  | 2      | 5     |
-      | vaso | Precio | 0      | 8     |
+      | algo       | filtro  | opcion |
+      | termometro | Ordenar | 1      | 
+      | vino       | Ordenar | 2      |
