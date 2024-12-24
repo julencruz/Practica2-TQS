@@ -54,6 +54,11 @@ public class generalSteps {
 		driver.quit();
 	}
 	
+	@When("^el usuario vaya a la pagina (.*)")
+	public void usuarioVaA(String pagina) {
+		driver.get(pagina);
+	}
+	
 	@And("^el usuario selecciona filtro (.*)")
 	public void elUsuarioSeleccionaFiltro(String filtro) throws InterruptedException {
 		System.out.println("Se selecciona filtro " + filtro);
@@ -79,6 +84,15 @@ public class generalSteps {
 	    }
 	    elements.get(opcion).click();;
 	}
+	
+	@Given("^el usuario esta en la pagina (.*)")
+	public void elUsuarioEstaEnLaPagina(String pagina) {
+		System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
+		driver = new FirefoxDriver();
+		driver.navigate().to(pagina);
+		acceptCookies();
+	}
+	
 	@Given("el usuario esta en la pagina principal")
 	public void elUsuarioEstaEnLaPaginaPrincipal() {
 		System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
@@ -92,6 +106,14 @@ public class generalSteps {
 		Thread.sleep(1000);
 		driver.findElement(By.id("ikea-search-input")).click();
 		System.out.println("Barra de busqueda clicada");
+	}
+	
+	@When("^el usuario haga clic en el producto (.*)")
+	public void clicProducto(int indice) throws InterruptedException {
+		Thread.sleep(1000);
+		List<WebElement> elementos = driver.findElements(By.cssSelector("div.plp-product-list__products div.plp-fragment-wrapper"));
+		elementos.get(indice).click();
+		System.out.println("Producto clicado");
 	}
 	
 	@And("^el usuario escriba (.*)")
@@ -114,7 +136,7 @@ public class generalSteps {
 		System.out.println("Icono de busqueda clicado");
 	}
 	
-	@When("^el usuario haga clic en el enlace (.*)$")
+	@When("^el usuario haga clic en la categoria (.*)$")
 	public void usuarioClicEnlace(String nombre) {
 	    clicAEnlace(nombre);
 	}
@@ -131,10 +153,61 @@ public class generalSteps {
         // Hacer clic en el enlace
         enlace.click();
     }
+    
+    @When("^el usuario añada al carrito el producto (.*)$")
+    public void añadirProductoAlCarrito(int indice) throws InterruptedException {
+    	Thread.sleep(3000);
+        // Encontrar todos los elementos de los productos en la lista
+        List<WebElement> elementos = driver.findElements(By.cssSelector("div.plp-product-list__products div.plp-fragment-wrapper"));
+        
+        // Seleccionar el producto por el índice y buscar el botón de añadir al carrito dentro de ese producto
+        WebElement producto = elementos.get(indice);
+        
+        // Usar XPath para encontrar el botón "Añadir al carrito" dentro del producto seleccionado
+        WebElement botonAñadir = producto.findElement(By.xpath(".//button[contains(@aria-label, 'Añadir')]"));
+        
+        // Hacer clic en el botón
+        botonAñadir.click();
+        
+        System.out.println("Producto añadido al carrito");
+    }
+    
+    @And("el usuario haga clic en el carrito")
+    public void usuarioClicACarrito() {
+    	try {
+            // Esperar hasta que el botón "Ir al carrito" esté visible
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement irAlCarritoButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            	    By.xpath("//button[contains(@class, 'hnf-btn') and .//span[contains(@class, 'hnf-btn__label') and text()='Ir al carrito']]")));
+
+
+            // Si el botón es visible, hacer clic en él
+            irAlCarritoButton.click();
+            System.out.println("Botón 'Ir al carrito' clickeado correctamente.");
+        } catch (Exception e) {
+            // Captura cualquier otra excepción
+        	driver.findElement(By.cssSelector("span.js-shopping-cart-icon")).click();
+        	System.out.println("Botón 'Ir al carrito' clickeado correctamente.");
+        }
+    }
+    
+    @When("^el usuario elimine producto del carrito (.*)")
+    public void eliminarProductoCarrito(int opcion) {
+    	switch(opcion) {
+    	case 1:
+    		driver.findElement(By.cssSelector("button.cart-ingka-quantity-stepper__decrease")).click();
+    		break;
+    	case 2:
+    		driver.findElement(By.xpath("//button[contains(@aria-label, 'Eliminar producto')]")).click();
+    		break;
+    	}
+    	
+    }
 	
-	
-	//Comprobaciones para los tests
-	
+// -----------------------------------------------------------------------------
+// ------------------- [Comprobaciones para los tests] -------------------------
+// -----------------------------------------------------------------------------
+    
     @Then("^se ha buscado (.*)")
     public void comprobarSeHaBuscadoAlgo(String algo) {
         System.out.println("comprobarSeHaBuscadoAlgo: ");
@@ -153,6 +226,30 @@ public class generalSteps {
         String text = element.getText();
         System.out.print("Texto encontrado: " + text + "\n");
         Assert.assertTrue(text.contains(algo));
+    }
+    
+    @Then("deben aparecer los detalles del producto")
+    public void comprobarDetallesDeProducto() throws InterruptedException {
+    	Thread.sleep(2000);
+        // Verificar que el nombre del producto esté visible
+        WebElement productNameElement = driver.findElement(By.cssSelector(".pip-header-section__description-text"));
+        Assert.assertNotNull(productNameElement);
+
+        // Verificar que el precio esté visible
+        WebElement priceElement = driver.findElement(By.cssSelector(".pip-price-module__primary-currency-price"));
+        Assert.assertNotNull(priceElement);
+
+        // Verificar que la imagen del producto esté visible
+        WebElement imageElement = driver.findElement(By.cssSelector(".pip-image"));
+        Assert.assertNotNull(imageElement);
+
+        // Verificar que las reseñas estén visibles
+        WebElement ratingElement = driver.findElement(By.cssSelector(".pip-rating"));
+        Assert.assertNotNull(ratingElement);
+
+        // Verificar que la descripción del producto esté visible
+        WebElement descriptionElement = driver.findElement(By.cssSelector(".pip-product-summary__description"));
+        Assert.assertNotNull(descriptionElement);
     }
     
 	@And("^deben aparecer al menos (.*) numero de productos")
@@ -227,5 +324,32 @@ public class generalSteps {
         System.out.print("1: " + text + "\n");
         
         Assert.assertTrue(text.contains("No hay resultados para"));
+	}
+	
+	@Then("^debe aparecer en el carrito (.*)$")
+	public void comprobarCarrito(float valor) throws InterruptedException {
+	    Thread.sleep(1000); // Espera explícita (aunque es preferible usar WebDriverWait en lugar de Thread.sleep)
+	    wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
+	    System.out.print("comprobarCarrito: ");
+	    
+	    try {
+	        String priceText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.notranslate"))).getText();
+	        String cleanedPrice = priceText.replaceAll("[^\\d,]", "").replace(',', '.');
+	        float total = Float.parseFloat(cleanedPrice);
+	        Assert.assertEquals(total, valor); 
+	        System.out.print("Correcto! \n");
+	        
+	    } catch (Exception e) {
+	        try {
+	            String emptyCartText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1.cart-ingka-text"))).getText();
+	            
+	            Assert.assertTrue(emptyCartText.contains("vacía"));
+	            System.out.print("Correcto! \n");
+		        
+	        } catch (Exception ex) {
+
+	            throw e;
+	        }
+	    }
 	}
 }

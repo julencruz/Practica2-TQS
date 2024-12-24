@@ -2,8 +2,8 @@ Feature: BusquedaPorCategorias
 
   Scenario Outline: Buscar producto clicando categorias
     Given el usuario esta en la pagina principal
-    When el usuario haga clic en el enlace <categoria>
-    When el usuario haga clic en el enlace <categoria-interior>
+    When el usuario haga clic en la categoria <categoria>
+    When el usuario haga clic en la categoria <categoria-interior>
     Then se ha buscado <categoria-interior>
     And muere
     
