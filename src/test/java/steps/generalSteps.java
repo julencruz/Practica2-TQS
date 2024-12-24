@@ -2,8 +2,9 @@ package steps;
 
 import static org.testng.Assert.assertTrue;
 
+import java.text.Normalizer;
 import java.time.Duration;
-import java.util.concurrent.TimeoutException;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,8 +25,8 @@ public class generalSteps {
 	WebDriverWait wait;
 	
 	public void acceptCookies() {
-	    wait = new WebDriverWait(driver, Duration.ofSeconds(10));  
-	    
+	    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 	    try {
 	        // Buscar el botón de aceptación de cookies por su ID
 	        WebElement acceptCookiesButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("onetrust-accept-btn-handler")));
@@ -35,9 +36,19 @@ public class generalSteps {
 	        // Esperar hasta que el div de cookies desaparezca
 	        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("onetrust-group-container")));
 	        System.out.println("El div de cookies desapareció");
+
+	        // Esperar a que el campo de búsqueda sea clickeable
+	        wait.until(ExpectedConditions.elementToBeClickable(By.id("ikea-search-input")));
+	        System.out.println("El campo de búsqueda está disponible");
+
 	    } catch (Exception e) {
-	        System.out.println("No se encontró el botón de cookies o ya se aceptaron.");
+	        System.out.println("No se encontró el botón de cookies o ya se aceptaron. Error: " + e.getMessage());
 	    }
+	}
+	
+	@And("muere")
+	public void muere() {
+		driver.quit();
 	}
 	
 	@Given("el usuario esta en la pagina principal")
@@ -56,8 +67,16 @@ public class generalSteps {
 	
 	@And("^el usuario escriba (.*)")
 	public void escribaAlgo(String algo) {
-		driver.findElement(By.id("ikea-search-input")).sendKeys(algo);
-		System.out.println("Se ha escrito "+ algo);
+	    WebElement searchBox = driver.findElement(By.id("ikea-search-input"));
+	    
+	    // Escribir en la barra de búsqueda
+	    searchBox.sendKeys(algo);
+	    System.out.println("Se ha escrito " + algo);
+	    
+	    // Esperar a que el texto deje de cambiar
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox, algo)
+	    );
 	}
 	
 	@And("el usuario haga clic en el icono de buscar")
@@ -66,18 +85,47 @@ public class generalSteps {
 		System.out.println("Icono de busqueda clicado");
 	}
 	
+	@When("^el usuario haga clic en el enlace (.*)$")
+	public void usuarioClicEnlace(String nombre) {
+	    clicAEnlace(nombre);
+	}
+
+    public void clicAEnlace(String nombre) {
+    	System.out.println("Clicando enlace");
+        // Normalizar el nombre: quitar espacios y reemplazar por guiones, todo en minúsculas
+    	String nombreNormalizado = Normalizer.normalize(nombre.trim().toLowerCase().replace(" ", "-"), Normalizer.Form.NFD);
+    	nombreNormalizado = nombreNormalizado.replaceAll("[^\\p{ASCII}]", "");
+
+        // Buscar el enlace cuyo href comience con la palabra clave normalizada
+        WebElement enlace = driver.findElement(By.xpath("//a[starts-with(@href, 'https://www.ikea.com/es/es/cat/" + nombreNormalizado + "')]"));
+
+        // Hacer clic en el enlace
+        enlace.click();
+    }
+	
 	
 	//Comprobaciones para los tests
 	
-	@Then("^se ha buscado (.*)")
-	public void comprobarSeHaBuscadoAlgo(String algo) {
-		System.out.println("comprobarSeHaBuscadoAlgo: ");
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Espera hasta 10 segundos
-	    String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[aria-label*='" + algo + "']"))).getText();
-		System.out.print("1: " + text + "\n");
-		Assert.assertTrue(text.contains(algo));
-	}
-	
+    @Then("^se ha buscado (.*)")
+    public void comprobarSeHaBuscadoAlgo(String algo) {
+        System.out.println("comprobarSeHaBuscadoAlgo: ");
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        
+        // Intentar encontrar el h1 con el atributo aria-label
+        WebElement element = null;
+        try {
+            element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[aria-label*='" + algo + "']")));
+        } catch (Exception e) {
+            // Si no se encuentra el h1 con aria-label, buscar el h1 con la clase plp-page-title__title
+            element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1.plp-page-title__title")));
+        }
+        
+        // Obtener el texto y comprobar si contiene lo que se esperaba
+        String text = element.getText();
+        System.out.print("Texto encontrado: " + text + "\n");
+        Assert.assertTrue(text.contains(algo));
+    }
+    
 	@And("^deben aparecer al menos (.*) numero de productos")
 	public void comprobarAlMenosValorProductos(int valor) {
 		System.out.println("comprobarAlMenosValorProductos: ");
@@ -91,10 +139,28 @@ public class generalSteps {
 	    Assert.assertTrue(numberOfProducts >= valor);
 	}
 	
+	@Then("^deben autocompletarse resultados que empiezan por (.*)")
+	public void debenAutocompletarseResultadosQueEmpiezanPor(String busqueda) throws InterruptedException {
+		System.out.println("Comprobando que los resultados empiezan por " + busqueda + " : ");
+		
+		Thread.sleep(1000);
+		
+		List<WebElement> listItems = driver.findElements(By.className("universal-item__text"));
+		boolean encontrado = false;
+		for (WebElement element : listItems) {
+			if (element.getText().toLowerCase().startsWith(busqueda.toLowerCase())) {
+				System.out.print("Elemento encontrado: " + element.getText());
+				encontrado = true;
+				break;
+			}
+		}
+		Assert.assertEquals(encontrado, true);
+	}
+	
 	@Then("^no deben aparecer resultados")
 	public void comprobarNoDebenAparecerResultados() {
 		System.out.println("comprobarNoDebenAparecerResultados: ");
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Espera hasta 10 segundos
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
 		String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1.plp-text--heading-l.search-summary__heading--zero"))).getText();
         System.out.print("1: " + text + "\n");
         
