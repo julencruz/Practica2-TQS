@@ -1,7 +1,7 @@
 Feature: AñadirCarrito
 
   Scenario Outline: Añadir producto al carrito
-    Given el usuario esta en la pagina <pagina>
+    Given el usuario esta en la pagina web <pagina>
     When el usuario añada al carrito el producto <producto>
     And el usuario haga clic en el carrito
     Then debe aparecer en el carrito <total>

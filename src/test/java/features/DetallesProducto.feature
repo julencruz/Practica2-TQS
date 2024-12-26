@@ -1,7 +1,7 @@
 Feature: DetallesProducto
 
   Scenario Outline: Detalles del producto
-    Given el usuario esta en la pagina <pagina>
+    Given el usuario esta en la pagina web <pagina>
     When el usuario haga clic en el producto <producto>
     Then deben aparecer los detalles del producto
     And muere

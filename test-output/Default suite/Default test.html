@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>21/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Tue Dec 24 23:48:42 CET 2024</td>
+<td>Started on:</td><td>Thu Dec 26 22:50:46 CET 2024</td>
 </tr>
-<tr><td>Total time:</td><td>31 seconds (31024 ms)</td>
+<tr><td>Total time:</td><td>433 seconds (433363 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,6 +67,65 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Iniciar sesión", "Iniciar sesión"</td>
+<td><div><pre>org.openqa.selenium.ElementNotInteractableException: Element &lt;a class=&quot;hnf-skip-to-content hnf-btn hnf-btn--secondary&quot; href=&quot;#hnf-content&quot;&gt; could not be scrolled into view
+Build info: version: &apos;4.27.0&apos;, revision: &apos;d6e718d134&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;22.0.2&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [39bbde07-2a7c-4561-9d05-acbd78a4c110, clickElement {id=905d8aad-5cfb-407f-868c-5a00a19adde9}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 133.0.3, moz:accessibilityChecks: false, moz:buildID: 20241209150345, moz:debuggerAddress: 127.0.0.1:22018, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 6104, moz:profile: C:\Users\julen\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:22018/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (39bbde07-2a7c-4561-9d05-acbd78a4c110)] -&gt; xpath: //a[contains(@href, &apos;#&apos;)]]
+Session ID: 39bbde07-2a7c-4561-9d05-acbd78a4c110
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at steps.generalSteps.clicAEnlace(generalSteps.java:193)
+	at ✽.el usuario haga clic en el enlace &quot;#&quot;(file:///C:/Users/julen/eclipse-workspace/Practica2-TQS/src/test/java/features/IniciarSesión.feature:7)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1469107147", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1469107147'><pre>org.openqa.selenium.ElementNotInteractableException: Element &lt;a class=&quot;hnf-skip-to-content hnf-btn hnf-btn--secondary&quot; href=&quot;#hnf-content&quot;&gt; could not be scrolled into view
+Build info: version: &apos;4.27.0&apos;, revision: &apos;d6e718d134&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;22.0.2&apos;
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Command: [39bbde07-2a7c-4561-9d05-acbd78a4c110, clickElement {id=905d8aad-5cfb-407f-868c-5a00a19adde9}]
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 133.0.3, moz:accessibilityChecks: false, moz:buildID: 20241209150345, moz:debuggerAddress: 127.0.0.1:22018, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 6104, moz:profile: C:\Users\julen\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:22018/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
+Element: [[FirefoxDriver: firefox on windows (39bbde07-2a7c-4561-9d05-acbd78a4c110)] -&gt; xpath: //a[contains(@href, &apos;#&apos;)]]
+Session ID: 39bbde07-2a7c-4561-9d05-acbd78a4c110
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at steps.generalSteps.clicAEnlace(generalSteps.java:193)
+	at ✽.el usuario haga clic en el enlace &quot;#&quot;(file:///C:/Users/julen/eclipse-workspace/Practica2-TQS/src/test/java/features/IniciarSesión.feature:7)
+</pre></div></td>
+<td>12</td>
+<td>RunTests@5745ca0e</td></tr>
+</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -76,9 +135,109 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto filtrados", "BusquedaFiltrada"</td>
+<td></td>
+<td>16</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto existente", "BusquedaProductosExistentes"</td>
+<td></td>
+<td>16</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Comprobar tienda más cercana", "Comprobar tienda más cercana"</td>
+<td></td>
+<td>15</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto filtrados", "BusquedaFiltrada"</td>
+<td></td>
+<td>16</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Detalles del producto", "DetallesProducto"</td>
+<td></td>
+<td>15</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto existente", "BusquedaProductosExistentes"</td>
+<td></td>
+<td>14</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Añadir producto al carrito", "AñadirCarrito"</td>
+<td></td>
+<td>48</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Sesión guarda carrito", "Sesion guarda carrito"</td>
+<td></td>
+<td>32</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto clicando categorias", "BusquedaPorCategorias"</td>
+<td></td>
+<td>23</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Añadir producto a lista de favoritos", "AñadirFavoritos"</td>
+<td></td>
+<td>17</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Cambiar el idioma a inglés", "Cambiar idioma"</td>
+<td></td>
+<td>16</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto clicando categorias", "BusquedaPorCategorias"</td>
+<td></td>
+<td>23</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto filtrados", "BusquedaFiltrada"</td>
+<td></td>
+<td>16</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto inexistente", "BusquedaProductosInexistentes"</td>
+<td></td>
+<td>15</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto autocompletado", "BusquedaAutocompletada"</td>
+<td></td>
+<td>13</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto inexistente", "BusquedaProductosInexistentes"</td>
+<td></td>
+<td>14</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
 <td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Sesión guarda carrito", "E"</td>
 <td></td>
-<td>30</td>
+<td>32</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Detalles del producto", "DetallesProducto"</td>
+<td></td>
+<td>16</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Aplicar descuento", "Aplicar descuento al carrito"</td>
+<td></td>
+<td>23</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto autocompletado", "BusquedaAutocompletada"</td>
+<td></td>
+<td>13</td>
+<td>RunTests@5745ca0e</td></tr>
+<tr>
+<td title='RunTests.runScenario()'><b>runScenario</b><br>Test class: RunTests<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Buscar producto filtrados", "BusquedaFiltrada"</td>
+<td></td>
+<td>16</td>
 <td>RunTests@5745ca0e</td></tr>
 </table><p>
 </body>

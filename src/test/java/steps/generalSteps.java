@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,6 +24,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class generalSteps {
+	
 	
 	WebDriver driver;
 	WebDriverWait wait;
@@ -54,6 +56,20 @@ public class generalSteps {
 		driver.quit();
 	}
 	
+	@And("el usuario hace clic en la barra de descuento")
+	public void usuarioClicDescuento() {
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    WebElement discountBar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("discountCode")));
+	    discountBar.click();
+	}
+	
+	@And("^el usuario escribe el codigo (.*)")
+	public void usuarioEscribeDescuento(String descuento) {
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    WebElement discountBar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("discountCode")));
+	    discountBar.sendKeys(descuento);
+	}
+	
 	@When("^el usuario vaya a la pagina (.*)")
 	public void usuarioVaA(String pagina) {
 		driver.get(pagina);
@@ -69,10 +85,9 @@ public class generalSteps {
 	
 	@And("^el usuario selecciona opción (.*)")
 	public void seleccionarOpcionFiltro(int opcion) {
-	    // Esperar a que el popup sea visible
 		System.out.println("Se seleccionará la " + (opcion+1) +"ª opción del popup");
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	    WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("plp-drop-down")));
-
 	    WebElement fieldset = popup.findElement(By.cssSelector("fieldset"));
 
 	    // Buscar todos los elementos clicables dentro del fieldset
@@ -85,7 +100,7 @@ public class generalSteps {
 	    elements.get(opcion).click();;
 	}
 	
-	@Given("^el usuario esta en la pagina (.*)")
+	@Given("^el usuario esta en la pagina web(.*)")
 	public void elUsuarioEstaEnLaPagina(String pagina) {
 		System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
 		driver = new FirefoxDriver();
@@ -130,6 +145,20 @@ public class generalSteps {
 	    );
 	}
 	
+	@And("^el usuario teclee la ubicación (.*)")
+	public void tecleeUbicación(String ubicacion) {
+	    WebElement searchBox = driver.findElement(By.id("hnf-store-search"));
+	    
+	    // Escribir en la barra de búsqueda
+	    searchBox.sendKeys(ubicacion);
+	    System.out.println("Se ha escrito " + ubicacion);
+	    
+	    // Esperar a que el texto deje de cambiar
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox, ubicacion)
+	    );
+	}
+	
 	@And("el usuario haga clic en el icono de buscar")
 	public void usuarioClicIconoBuscar() {
 		driver.findElement(By.id("search-box__searchbutton")).click();
@@ -137,11 +166,11 @@ public class generalSteps {
 	}
 	
 	@When("^el usuario haga clic en la categoria (.*)$")
-	public void usuarioClicEnlace(String nombre) {
-	    clicAEnlace(nombre);
+	public void usuarioClicCategoria(String nombre) {
+	    clicACategoria(nombre);
 	}
 
-    public void clicAEnlace(String nombre) {
+    public void clicACategoria(String nombre) {
     	System.out.println("Clicando enlace");
         // Normalizar el nombre: quitar espacios y reemplazar por guiones, todo en minúsculas
     	String nombreNormalizado = Normalizer.normalize(nombre.trim().toLowerCase().replace(" ", "-"), Normalizer.Form.NFD);
@@ -152,6 +181,16 @@ public class generalSteps {
 
         // Hacer clic en el enlace
         enlace.click();
+    }
+    
+    @When("^el usuario haga clic en el enlace (.*)$")
+    public void clicAEnlace(String enlace) {
+    	wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement enlaceElement = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//a[contains(@href, '" + enlace.replace("\"", "") + "')]")
+        ));
+
+        enlaceElement.click();
     }
     
     @When("^el usuario añada al carrito el producto (.*)$")
@@ -172,10 +211,57 @@ public class generalSteps {
         System.out.println("Producto añadido al carrito");
     }
     
+    @When("^el usuario clique en enlace con aria-label (.*)")
+    public void hacerClickEnEnlacePorAriaLabel(String ariaLabel) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement enlace = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@aria-label, '" + ariaLabel + "')]")));
+        enlace.click();
+    }
+
+
+    
+    @And("^el usuario complete el formulario de login con (.*) y (.*)$")
+    public void completarFormulario(String email, String password) {
+        WebElement formulario = driver.findElement(By.name("Login"));
+
+        List<WebElement> inputs = formulario.findElements(By.tagName("input"));
+
+        if (inputs.size() >= 2) {
+            escribirConRetraso(inputs.get(0), email);
+            escribirConRetraso(inputs.get(1), password);
+
+            formulario.findElement(By.cssSelector("button[type='submit']")).click();
+
+            System.out.println("Formulario completado con éxito.");
+        } else {
+            System.out.println("No se encontraron suficientes campos de entrada en el formulario.");
+        }
+    }
+    
+    @And("el usuario presiona submit")
+    public void usuarioPresionaSubmit() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Esperar hasta que el botón de submit sea visible y clicable
+        WebElement botonSubmit = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
+        // Hacer clic en el botón de submit
+        botonSubmit.click();
+    }
+
+
+    private void escribirConRetraso(WebElement input, String texto) {
+        for (char c : texto.toCharArray()) {
+            input.sendKeys(String.valueOf(c));
+            try {
+                Thread.sleep((long) (Math.random() * 200 + 100));  // Retraso aleatorio entre 100ms y 400ms
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @And("el usuario haga clic en el carrito")
     public void usuarioClicACarrito() {
     	try {
-            // Esperar hasta que el botón "Ir al carrito" esté visible
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement irAlCarritoButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
             	    By.xpath("//button[contains(@class, 'hnf-btn') and .//span[contains(@class, 'hnf-btn__label') and text()='Ir al carrito']]")));
@@ -203,10 +289,83 @@ public class generalSteps {
     	}
     	
     }
+    
+    @When("^el usuario hace clic en el texto (.*)$")
+    public void hacerClickEnTexto(String textoBoton) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Buscar el span que contiene el texto
+        WebElement span = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(), '" + textoBoton + "')]")));
+        WebElement elemento;
+        try {
+            // Intentar encontrar el ancestro botón más cercano
+            elemento = span.findElement(By.xpath("./ancestor::button"));
+        } catch (Exception e) {
+        	elemento = span.findElement(By.xpath("./ancestor::a"));
+        }
+        elemento.click();
+        Thread.sleep(2000);
+    }
+
+
+    @When("^el usuario hace clic en el boton con clase (.*)$")
+    public void hacerClickEnBotonPorClase(String claseBoton) throws InterruptedException {
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("." + claseBoton)));
+        boton.click();
+        Thread.sleep(2000);
+    }
+    
+    @And("el usuario hace clic en su lista")
+    public void usuarioClicLista() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Buscar el elemento h4 que contiene el texto "Mi lista"
+        WebElement lista = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(), 'Mi lista')]")));
+        lista.click();
+    }
+    
+    @And("el usuario hace clic en la barra de ubicación")
+    public void buscarPorUbicacion() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement campoBusqueda = wait.until(ExpectedConditions.elementToBeClickable(By.id("hnf-store-search")));
+        campoBusqueda.click();
+    }
+
+
 	
 // -----------------------------------------------------------------------------
 // ------------------- [Comprobaciones para los tests] -------------------------
 // -----------------------------------------------------------------------------
+    
+    @Then("comprobar por distancia")
+    public void verificarDistanciaOrden() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        List<WebElement> elementos = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".hnf-choice__list-item")));
+        
+        List<Double> distanciasOriginales = new ArrayList<>();
+        
+        for (WebElement elemento : elementos) {
+            List<WebElement> distanciaSpan = elemento.findElements(By.className("hnf-choice-item__caption"));
+            String textoDistancia = distanciaSpan.get(1).getText();
+            double distancia = Double.parseDouble(textoDistancia.replaceAll("[^\\d,]", "").replace(',', '.'));
+            distanciasOriginales.add(distancia);
+        }
+
+        List<Double> distanciasOrdenadas = new ArrayList<>(distanciasOriginales);
+        Collections.sort(distanciasOrdenadas);
+        Assert.assertEquals(distanciasOrdenadas, distanciasOriginales);
+        System.out.println("Las distancias están ordenadas correctamente de menor a mayor.");
+    }
+
+    
+    @Then("comprueba que este la sesion iniciada")
+    public void sesionIniciada() {
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//div[@class='member-card__name' and text()='Practica2 TQS']")
+        ));
+
+        Assert.assertNotNull(element);
+    }
     
     @Then("^se ha buscado (.*)")
     public void comprobarSeHaBuscadoAlgo(String algo) {
@@ -227,6 +386,24 @@ public class generalSteps {
         System.out.print("Texto encontrado: " + text + "\n");
         Assert.assertTrue(text.contains(algo));
     }
+    
+    @Then("^comprobar que aparece (.*)$")
+    public void comprobarQueAparece(String texto) {
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        List<WebElement> elementos = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[contains(text(), '" + texto + "')]"), 0));
+
+        boolean textoEncontrado = elementos.size() > 0;
+
+        if (textoEncontrado) {
+            System.out.println("El texto '" + texto + "' fue encontrado en la página.");
+        } else {
+            System.out.println("El texto '" + texto + "' no fue encontrado en la página.");
+        }
+
+        Assert.assertTrue(textoEncontrado);
+    }
+
+    
     
     @Then("deben aparecer los detalles del producto")
     public void comprobarDetallesDeProducto() throws InterruptedException {
