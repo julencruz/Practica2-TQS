@@ -1,10 +1,10 @@
-Feature: BusquedaFiltrada
+Feature: Busqueda ordenada
 
-  Scenario Outline: Buscar producto filtrados
+  Scenario Outline: Buscar producto ordenada
     Given el usuario esta en la pagina principal
     When el usuario haga clic en la barra de busqueda
     And el usuario escriba <algo>
-    And el usuario haga clic en el icono de buscar
+    And el usuario presiona submit
     And el usuario selecciona filtro <filtro>
     And el usuario selecciona opción <opcion>
     Then deben estar ordenados <opcion>

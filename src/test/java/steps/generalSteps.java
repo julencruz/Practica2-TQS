@@ -47,15 +47,17 @@ public class generalSteps {
 	        System.out.println("El campo de búsqueda está disponible");
 
 	    } catch (Exception e) {
-	        System.out.println("No se encontró el botón de cookies. Error: " + e.getMessage());
+	        System.out.println("No se encontró el botón de cookies.");
 	    }
 	}
 	
+	//Todas la usan, es para que se cierre el navegador abierto
 	@And("muere")
 	public void muere() {
 		driver.quit();
 	}
 	
+	//AplicarDescuento.feature sirve para hacerle focus a la barra donde escribir el codigo de descuento.
 	@And("el usuario hace clic en la barra de descuento")
 	public void usuarioClicDescuento() {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -63,6 +65,7 @@ public class generalSteps {
 	    discountBar.click();
 	}
 	
+	//AplicarDescuento.feature una vez hecho focus, sirve para escribir el codigo de descuento.
 	@And("^el usuario escribe el codigo (.*)")
 	public void usuarioEscribeDescuento(String descuento) {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -70,11 +73,13 @@ public class generalSteps {
 	    discountBar.sendKeys(descuento);
 	}
 	
+	//SesiónGuardaCarrito.feature, sirve para ir a otra pagina sin hacer una nueva ventana para el firefox
 	@When("^el usuario vaya a la pagina (.*)")
 	public void usuarioVaA(String pagina) {
 		driver.get(pagina);
 	}
 	
+	//BusquedaFiltrada.feature, BusquedaOrdenada.feature, sirve para escoger el botón del filtro
 	@And("^el usuario selecciona filtro (.*)")
 	public void elUsuarioSeleccionaFiltro(String filtro) throws InterruptedException {
 		System.out.println("Se selecciona filtro " + filtro);
@@ -83,6 +88,7 @@ public class generalSteps {
         filtroBoton.click();
 	}
 	
+	//BusquedaFiltrada.feature, BusquedaOrdenada.feature, sirve para escoger una opción dentro del popup del filtro
 	@And("^el usuario selecciona opción (.*)")
 	public void seleccionarOpcionFiltro(int opcion) {
 		System.out.println("Se seleccionará la " + (opcion+1) +"ª opción del popup");
@@ -100,7 +106,11 @@ public class generalSteps {
 	    elements.get(opcion).click();;
 	}
 	
-	@Given("^el usuario esta en la pagina web(.*)")
+	//AñadirCarrito.feature, AñadirProductoFavoritos.feature, 
+	//AplicarDescuento.feature, DetallesProducto.feature, 
+	//EliminarCarrito.feature, SesionGuardaCarrito.feature, 
+	//sirve para abrir un navegador nuevo ya abierto con la pagina que se especifique en el parametro.
+	@Given("^el usuario esta en la pagina web (.*)")
 	public void elUsuarioEstaEnLaPagina(String pagina) {
 		System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
 		driver = new FirefoxDriver();
@@ -108,6 +118,11 @@ public class generalSteps {
 		acceptCookies();
 	}
 	
+	//BusquedaAutocompletada.feature, BusquedaFiltrada.feature, 
+	//BusquedaOrdenada.feature, BusquedaPorCategorias.feature, 
+	//BusquedaProductosExistentes.feature, BusquedaProductosInexistentes.feature, 
+	//CambiarIdioma.feature, ComprobarTiendaMasCercana.feature, IniciarSesión.feature
+	//Sirve para abrir el navegador abierto con la pagina de ikea.com España
 	@Given("el usuario esta en la pagina principal")
 	public void elUsuarioEstaEnLaPaginaPrincipal() {
 		System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
@@ -116,6 +131,9 @@ public class generalSteps {
 		acceptCookies();
 	}
 	
+	//BusquedaAutocompletada.feature, BusquedaFiltrada.feature, 
+	//BusquedaOrdenada.feature, BusquedaProductosExistentes.feature, BusquedaProductosInexistentes.feature
+	//Sirve para hacer clic en la barra de búsqueda
 	@When("el usuario haga clic en la barra de busqueda")
 	public void clicBarraBusqueda() throws InterruptedException {
 		Thread.sleep(1000);
@@ -123,6 +141,20 @@ public class generalSteps {
 		System.out.println("Barra de busqueda clicada");
 	}
 	
+	//BusquedaAutocompletada.feature, BusquedaFiltrada.feature, 
+	//BusquedaOrdenada.feature, BusquedaProductosExistentes.feature, BusquedaProductosInexistentes.feature
+	//Sirve para una vez en focus la barra de busqueda, escribir algo
+	@And("^el usuario escriba (.*)")
+	public void escribaAlgo(String algo) {
+	    WebElement searchBox = driver.findElement(By.id("ikea-search-input"));
+	    searchBox.sendKeys(algo);
+	    System.out.println("Se ha escrito " + algo);
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox, algo)
+	    );
+	}
+	
+	//DetallesProducto.feature, sirve para darle clic al producto e ir a la página de especificacion
 	@When("^el usuario haga clic en el producto (.*)")
 	public void clicProducto(int indice) throws InterruptedException {
 		Thread.sleep(1000);
@@ -131,47 +163,22 @@ public class generalSteps {
 		System.out.println("Producto clicado");
 	}
 	
-	@And("^el usuario escriba (.*)")
-	public void escribaAlgo(String algo) {
-	    WebElement searchBox = driver.findElement(By.id("ikea-search-input"));
-	    
-	    // Escribir en la barra de búsqueda
-	    searchBox.sendKeys(algo);
-	    System.out.println("Se ha escrito " + algo);
-	    
-	    // Esperar a que el texto deje de cambiar
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox, algo)
-	    );
-	}
-	
+	//ComprobarTiendaMasCercana.feature, sirve para escribir en la barra de ubicación.
 	@And("^el usuario teclee la ubicación (.*)")
 	public void tecleeUbicación(String ubicacion) {
 	    WebElement searchBox = driver.findElement(By.id("hnf-store-search"));
-	    
-	    // Escribir en la barra de búsqueda
 	    searchBox.sendKeys(ubicacion);
 	    System.out.println("Se ha escrito " + ubicacion);
-	    
-	    // Esperar a que el texto deje de cambiar
+
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	    wait.until(ExpectedConditions.textToBePresentInElementValue(searchBox, ubicacion)
 	    );
 	}
 	
-	@And("el usuario haga clic en el icono de buscar")
-	public void usuarioClicIconoBuscar() {
-		driver.findElement(By.id("search-box__searchbutton")).click();
-		System.out.println("Icono de busqueda clicado");
-	}
-	
+	//BusquedaPorCategorias.feature, sirve para dar clic a la categoria principal
 	@When("^el usuario haga clic en la categoria (.*)$")
 	public void usuarioClicCategoria(String nombre) {
-	    clicACategoria(nombre);
-	}
-
-    public void clicACategoria(String nombre) {
-    	System.out.println("Clicando enlace");
+		System.out.println("Clicando enlace");
         // Normalizar el nombre: quitar espacios y reemplazar por guiones, todo en minúsculas
     	String nombreNormalizado = Normalizer.normalize(nombre.trim().toLowerCase().replace(" ", "-"), Normalizer.Form.NFD);
     	nombreNormalizado = nombreNormalizado.replaceAll("[^\\p{ASCII}]", "");
@@ -181,8 +188,9 @@ public class generalSteps {
 
         // Hacer clic en el enlace
         enlace.click();
-    }
+	}
     
+	//IniciarSesion.feature, sirve para, de forma general, seleccionar los enlaces segun su href. 
     @When("^el usuario haga clic en el enlace (.*)$")
     public void clicAEnlace(String enlace) {
     	wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -193,6 +201,9 @@ public class generalSteps {
         enlaceElement.click();
     }
     
+    //AñadirCarrito.feature, AplicarDescuento.feature, 
+    //EliminarCarrito.feature, SesionGuardaCarrito.feature
+    //Sirve para que en la lista donde salen los productos, puedas escoger el que quieres según su indice y lo añada directamente al carrito
     @When("^el usuario añada al carrito el producto (.*)$")
     public void añadirProductoAlCarrito(int indice) throws InterruptedException {
     	Thread.sleep(3000);
@@ -211,6 +222,7 @@ public class generalSteps {
         System.out.println("Producto añadido al carrito");
     }
     
+    //CambiarIdioma.feature, sirve para escoger enlaces segun su aria-label (intento de generalizar aunque solamente 1 feature la necesitaba)
     @When("^el usuario clique en enlace con aria-label (.*)")
     public void hacerClickEnEnlacePorAriaLabel(String ariaLabel) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -218,8 +230,7 @@ public class generalSteps {
         enlace.click();
     }
 
-
-    
+    //IniciarSesion.feature, sirve para completar el formulario de login
     @And("^el usuario complete el formulario de login con (.*) y (.*)$")
     public void completarFormulario(String email, String password) {
         WebElement formulario = driver.findElement(By.name("Login"));
@@ -238,16 +249,8 @@ public class generalSteps {
         }
     }
     
-    @And("el usuario presiona submit")
-    public void usuarioPresionaSubmit() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        // Esperar hasta que el botón de submit sea visible y clicable
-        WebElement botonSubmit = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
-        // Hacer clic en el botón de submit
-        botonSubmit.click();
-    }
 
-
+    //Funcion hecha porque sino pone que utilizamos bots
     private void escribirConRetraso(WebElement input, String texto) {
         for (char c : texto.toCharArray()) {
             input.sendKeys(String.valueOf(c));
@@ -258,38 +261,58 @@ public class generalSteps {
             }
         }
     }
+    
+    //AplicarDescuento.feature, ComprobarTiendaMásCercana
+    //BusquedaFiltrada.feature, BusquedaOrdenada.feature
+    //BusquedaProductosExistentes.feature, BusquedaProductosInexistentes.feature
+    //Sirve para presionar el botón de submit directamente.
+    @And("el usuario presiona submit")
+    public void usuarioPresionaSubmit() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Esperar hasta que el botón de submit sea clicable
+        WebElement botonSubmit = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
+        // Hacer clic en el botón de submit
+        botonSubmit.click();
+    }
 
+    //AñadirCarrito.feature, AplicarDescuento.feature, 
+    //EliminarCarrito.feature, SesionGuardaCarrito.feature 
+    //Cuando añades un producto al carrito sale un popup con un botón, está funcion sirve tanto para darle a ese popup, como si no aparece ir
+    //desde la barra navegadora
     @And("el usuario haga clic en el carrito")
     public void usuarioClicACarrito() {
     	try {
+    		//Probamos primero el boton de ir al carrito del popup
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement irAlCarritoButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            WebElement irAlCarrito = wait.until(ExpectedConditions.visibilityOfElementLocated(
             	    By.xpath("//button[contains(@class, 'hnf-btn') and .//span[contains(@class, 'hnf-btn__label') and text()='Ir al carrito']]")));
-
-
-            // Si el botón es visible, hacer clic en él
-            irAlCarritoButton.click();
+            irAlCarrito.click();
             System.out.println("Botón 'Ir al carrito' clickeado correctamente.");
         } catch (Exception e) {
-            // Captura cualquier otra excepción
+        	//Probamos el boton de ir al carrito normal del navbar
         	driver.findElement(By.cssSelector("span.js-shopping-cart-icon")).click();
         	System.out.println("Botón 'Ir al carrito' clickeado correctamente.");
         }
     }
     
+    //EliminarCarrito.feature, sirve para eliminar del carrito usando el simbolo de restar o el cubo de la basura.
     @When("^el usuario elimine producto del carrito (.*)")
     public void eliminarProductoCarrito(int opcion) {
     	switch(opcion) {
     	case 1:
+    		//Lo quitamos con el simbolo de restar
     		driver.findElement(By.cssSelector("button.cart-ingka-quantity-stepper__decrease")).click();
     		break;
     	case 2:
+    		//Se elimina totalmente el producto con el simbolo del cubo de la basura
     		driver.findElement(By.xpath("//button[contains(@aria-label, 'Eliminar producto')]")).click();
     		break;
     	}
     	
     }
     
+    //CambiarIdioma.feature, ComprobarTiendaMasCercana.feature
+    //Sirve para encontrar o el botón o el enlace al que pertenece un texto.
     @When("^el usuario hace clic en el texto (.*)$")
     public void hacerClickEnTexto(String textoBoton) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -300,13 +323,14 @@ public class generalSteps {
             // Intentar encontrar el ancestro botón más cercano
             elemento = span.findElement(By.xpath("./ancestor::button"));
         } catch (Exception e) {
+        	// Intentar encontrar el ancestro enlace más cercano
         	elemento = span.findElement(By.xpath("./ancestor::a"));
         }
         elemento.click();
         Thread.sleep(2000);
     }
 
-
+    //AñadirProductoFavoritos.feature, AplicarDescuento.feature, encontrar elemento clicable según su clase.
     @When("^el usuario hace clic en el boton con clase (.*)$")
     public void hacerClickEnBotonPorClase(String claseBoton) throws InterruptedException {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -315,27 +339,28 @@ public class generalSteps {
         Thread.sleep(2000);
     }
     
-    @And("el usuario hace clic en su lista")
-    public void usuarioClicLista() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        // Buscar el elemento h4 que contiene el texto "Mi lista"
-        WebElement lista = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(), 'Mi lista')]")));
-        lista.click();
-    }
-    
+    //ComprobarTiendaMasCercana.feature, sirve para darle clic a su barra de busqueda de ubicacion.
     @And("el usuario hace clic en la barra de ubicación")
     public void buscarPorUbicacion() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement campoBusqueda = wait.until(ExpectedConditions.elementToBeClickable(By.id("hnf-store-search")));
         campoBusqueda.click();
     }
-
-
+    
+ 	// Aunque las funciones buscarPorUbicacion() y clicBarraBusqueda() podrían combinarse en una función genérica hacerClicPorId(String id),
+ 	// hemos decidido priorizar la legibilidad sobre la generalización. 
+    
+    
+    
+    
+    
 	
 // -----------------------------------------------------------------------------
 // ------------------- [Comprobaciones para los tests] -------------------------
 // -----------------------------------------------------------------------------
     
+    //ComprobarTiendaMasCercana.feature, 
+    //Obtenemos los elementos de la lista de ubicaciones donde aparezca la distancia, limpiamos el texto y comprobamos que esten en orden ascendente.
     @Then("comprobar por distancia")
     public void verificarDistanciaOrden() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -356,37 +381,9 @@ public class generalSteps {
         System.out.println("Las distancias están ordenadas correctamente de menor a mayor.");
     }
 
-    
-    @Then("comprueba que este la sesion iniciada")
-    public void sesionIniciada() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//div[@class='member-card__name' and text()='Practica2 TQS']")
-        ));
-
-        Assert.assertNotNull(element);
-    }
-    
-    @Then("^se ha buscado (.*)")
-    public void comprobarSeHaBuscadoAlgo(String algo) {
-        System.out.println("comprobarSeHaBuscadoAlgo: ");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        
-        // Intentar encontrar el h1 con el atributo aria-label
-        WebElement element = null;
-        try {
-            element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1[aria-label*='" + algo + "']")));
-        } catch (Exception e) {
-            // Si no se encuentra el h1 con aria-label, buscar el h1 con la clase plp-page-title__title
-            element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1.plp-page-title__title")));
-        }
-        
-        // Obtener el texto y comprobar si contiene lo que se esperaba
-        String text = element.getText();
-        System.out.print("Texto encontrado: " + text + "\n");
-        Assert.assertTrue(text.contains(algo));
-    }
-    
+    //AñadirFavoritos.feature, BusquedaFiltrada.feature, BusquedaPorCategorias.feature, 
+    //BusquedaProductosExistentes.feature, CambiarIdioma.feature, IniciarSesion.feature
+    //Sirve para comprobar que en algún punto de la página aparece lo que queremos
     @Then("^comprobar que aparece (.*)$")
     public void comprobarQueAparece(String texto) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -404,7 +401,8 @@ public class generalSteps {
     }
 
     
-    
+    //DetallesProducto.feature, sirve para comprobar que esten todos las especificaciones del producto:
+    //Precio, descripción, imagen y reseñas
     @Then("deben aparecer los detalles del producto")
     public void comprobarDetallesDeProducto() throws InterruptedException {
     	Thread.sleep(2000);
@@ -429,6 +427,8 @@ public class generalSteps {
         Assert.assertNotNull(descriptionElement);
     }
     
+    //BusquedaFiltrada.feature, BuscarProductosExistentes.feature
+    //Sirve para asegurarnos de que se filtran y encuentran los productos necesarios
 	@And("^deben aparecer al menos (.*) numero de productos")
 	public void comprobarAlMenosValorProductos(int valor) {
 		System.out.println("comprobarAlMenosValorProductos: ");
@@ -442,6 +442,7 @@ public class generalSteps {
 	    Assert.assertTrue(numberOfProducts >= valor);
 	}
 	
+	//BusquedaAutocompletada.feature, sirve para asegurarnos que se autocompleta correctamente
 	@Then("^deben autocompletarse resultados que empiezan por (.*)")
 	public void debenAutocompletarseResultadosQueEmpiezanPor(String busqueda) throws InterruptedException {
 		System.out.println("Comprobando que los resultados empiezan por " + busqueda + " : ");
@@ -460,6 +461,7 @@ public class generalSteps {
 		Assert.assertEquals(encontrado, true);
 	}
 	
+	//BusquedaOrdenada.feature, se comprueba que los precios esten ordenados ascendiente o descendientemente, segun la opción
 	@Then("^deben estar ordenados (.*)")
 	public void comprobarResultadosOrdenados(int opcion) {
 		System.out.println("comprobarResultadosOrdenados: ");
@@ -493,6 +495,7 @@ public class generalSteps {
 	    Assert.assertEquals(pricesOrdenados, prices);
 	}
 	
+	//BusquedaProductosInexistentes.feauture, sirve para asegurarnos de que no aparecen productos.
 	@Then("^no deben aparecer resultados")
 	public void comprobarNoDebenAparecerResultados() {
 		System.out.println("comprobarNoDebenAparecerResultados: ");
@@ -503,30 +506,17 @@ public class generalSteps {
         Assert.assertTrue(text.contains("No hay resultados para"));
 	}
 	
+	//AñadirCarrito.feature, AplicarDescuento.feature, EliminarCarrito.feature, SesionGuardaCarrito.feature  
+	//Sirve para asegurarnos que en el total del carrito con iva aparezca el valor seleccionado.
 	@Then("^debe aparecer en el carrito (.*)$")
 	public void comprobarCarrito(float valor) throws InterruptedException {
 	    Thread.sleep(1000); // Espera explícita (aunque es preferible usar WebDriverWait en lugar de Thread.sleep)
 	    wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
 	    System.out.print("comprobarCarrito: ");
-	    
-	    try {
-	        String priceText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.notranslate"))).getText();
-	        String cleanedPrice = priceText.replaceAll("[^\\d,]", "").replace(',', '.');
-	        float total = Float.parseFloat(cleanedPrice);
-	        Assert.assertEquals(total, valor); 
-	        System.out.print("Correcto! \n");
-	        
-	    } catch (Exception e) {
-	        try {
-	            String emptyCartText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1.cart-ingka-text"))).getText();
-	            
-	            Assert.assertTrue(emptyCartText.contains("vacía"));
-	            System.out.print("Correcto! \n");
-		        
-	        } catch (Exception ex) {
-
-	            throw e;
-	        }
-	    }
+	    String priceText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.notranslate"))).getText();
+	    String cleanedPrice = priceText.replaceAll("[^\\d,]", "").replace(',', '.');
+	    float total = Float.parseFloat(cleanedPrice);
+	    Assert.assertEquals(total, valor); 
+	    System.out.print("Correcto! \n");
 	}
 }

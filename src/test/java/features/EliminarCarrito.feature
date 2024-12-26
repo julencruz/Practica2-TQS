@@ -1,5 +1,5 @@
-Feature: E
-	Scenario Outline: Sesión guarda carrito
+Feature: Eliminar del carrito
+	Scenario Outline: Eliminar productos del carrito
     Given el usuario esta en la pagina web <pagina>
     When el usuario añada al carrito el producto <producto>
     When el usuario añada al carrito el producto <producto>

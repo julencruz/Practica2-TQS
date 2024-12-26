@@ -4,10 +4,10 @@ Feature: BusquedaFiltrada
     Given el usuario esta en la pagina principal
     When el usuario haga clic en la barra de busqueda
     And el usuario escriba <algo>
-    And el usuario haga clic en el icono de buscar
+    And el usuario presiona submit
     And el usuario selecciona filtro <filtro>
     And el usuario selecciona opción <opcion>
-    Then se ha buscado <algo>
+    Then comprobar que aparece <algo>
     And deben aparecer al menos <valor> numero de productos
     And muere
 

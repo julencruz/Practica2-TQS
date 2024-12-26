@@ -4,7 +4,7 @@ Feature: BusquedaPorCategorias
     Given el usuario esta en la pagina principal
     When el usuario haga clic en la categoria <categoria>
     When el usuario haga clic en la categoria <categoria-interior>
-    Then se ha buscado <categoria-interior>
+    Then comprobar que aparece <categoria-interior>
     And muere
     
 

@@ -4,7 +4,7 @@ Feature: BusquedaProductosInexistentes
 	   Given el usuario esta en la pagina principal
 	   When el usuario haga clic en la barra de busqueda
 	   And el usuario escriba <algo>
-	   And el usuario haga clic en el icono de buscar
+	   And el usuario presiona submit
 	   Then no deben aparecer resultados
 	   And muere
 	

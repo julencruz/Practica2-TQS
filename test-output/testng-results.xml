@@ -1,107 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="22" passed="21" failed="1" skipped="0">
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-26T22:50:46 CET" name="Default suite" finished-at="2024-12-26T22:58:00 CET" duration-ms="433363">
+  <suite started-at="2024-12-27T00:08:21 CET" name="Default suite" finished-at="2024-12-27T00:08:50 CET" duration-ms="28873">
     <groups>
       <group name="cucumber">
         <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2024-12-26T22:50:46 CET" name="Default test" finished-at="2024-12-26T22:58:00 CET" duration-ms="433363">
+    <test started-at="2024-12-27T00:08:21 CET" name="Default test" finished-at="2024-12-27T00:08:50 CET" duration-ms="28873">
       <class name="RunTests">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:50:46 CET" name="setUpClass" finished-at="2024-12-26T22:50:47 CET" duration-ms="562" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-27T00:08:21 CET" name="setUpClass" finished-at="2024-12-27T00:08:21 CET" duration-ms="279" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@3be369fc]]>
+                <![CDATA[org.testng.TestRunner@1e141e42]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:50:47 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:51:10 CET" duration-ms="23411" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Aplicar descuento"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Aplicar descuento al carrito"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:51:10 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:51:59 CET" duration-ms="48394" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Añadir producto al carrito"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["AñadirCarrito"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:51:59 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:52:16 CET" duration-ms="17531" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Añadir producto a lista de favoritos"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["AñadirFavoritos"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:52:16 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:52:30 CET" duration-ms="13159" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto autocompletado"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaAutocompletada"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:52:30 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:52:43 CET" duration-ms="13444" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto autocompletado"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaAutocompletada"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:52:43 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:52:59 CET" duration-ms="16324" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-27T00:08:21 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-27T00:08:36 CET" duration-ms="14902" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -117,7 +37,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:52:59 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:53:16 CET" duration-ms="16252" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-27T00:08:36 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-27T00:08:50 CET" duration-ms="13629" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -133,284 +53,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:53:16 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:53:32 CET" duration-ms="16223" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto filtrados"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaFiltrada"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:53:32 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:53:48 CET" duration-ms="16507" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto filtrados"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaFiltrada"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:53:48 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:54:12 CET" duration-ms="23482" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto clicando categorias"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaPorCategorias"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:54:12 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:54:35 CET" duration-ms="23145" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto clicando categorias"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaPorCategorias"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:54:35 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:54:51 CET" duration-ms="16422" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto existente"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaProductosExistentes"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:54:51 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:55:06 CET" duration-ms="14990" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto existente"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaProductosExistentes"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:55:06 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:55:22 CET" duration-ms="15878" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto inexistente"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaProductosInexistentes"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:55:22 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:55:37 CET" duration-ms="14572" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Buscar producto inexistente"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["BusquedaProductosInexistentes"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:55:37 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:55:54 CET" duration-ms="16708" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Cambiar el idioma a inglés"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Cambiar idioma"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:55:54 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:56:10 CET" duration-ms="15981" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Comprobar tienda más cercana"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Comprobar tienda más cercana"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:56:10 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:56:25 CET" duration-ms="15940" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Detalles del producto"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["DetallesProducto"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:56:25 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:56:42 CET" duration-ms="16172" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Detalles del producto"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["DetallesProducto"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:56:42 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:57:15 CET" duration-ms="32888" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Sesión guarda carrito"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["E"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:57:15 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:57:27 CET" duration-ms="12893" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Iniciar sesión"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Iniciar sesión"]]>
-              </value>
-            </param>
-          </params>
-          <exception class="org.openqa.selenium.ElementNotInteractableException">
-            <message>
-              <![CDATA[Element <a class="hnf-skip-to-content hnf-btn hnf-btn--secondary" href="#hnf-content"> could not be scrolled into view
-Build info: version: '4.27.0', revision: 'd6e718d134'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.2'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [39bbde07-2a7c-4561-9d05-acbd78a4c110, clickElement {id=905d8aad-5cfb-407f-868c-5a00a19adde9}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 133.0.3, moz:accessibilityChecks: false, moz:buildID: 20241209150345, moz:debuggerAddress: 127.0.0.1:22018, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 6104, moz:profile: C:\Users\julen\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:22018/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
-Element: [[FirefoxDriver: firefox on windows (39bbde07-2a7c-4561-9d05-acbd78a4c110)] -> xpath: //a[contains(@href, '#')]]
-Session ID: 39bbde07-2a7c-4561-9d05-acbd78a4c110]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.ElementNotInteractableException: Element <a class="hnf-skip-to-content hnf-btn hnf-btn--secondary" href="#hnf-content"> could not be scrolled into view
-Build info: version: '4.27.0', revision: 'd6e718d134'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.2'
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Command: [39bbde07-2a7c-4561-9d05-acbd78a4c110, clickElement {id=905d8aad-5cfb-407f-868c-5a00a19adde9}]
-Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 133.0.3, moz:accessibilityChecks: false, moz:buildID: 20241209150345, moz:debuggerAddress: 127.0.0.1:22018, moz:geckodriverVersion: 0.34.0, moz:headless: false, moz:platformVersion: 10.0, moz:processID: 6104, moz:profile: C:\Users\julen\AppData\Loca..., moz:shutdownTimeout: 60000, moz:webdriverClick: true, moz:windowless: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://127.0.0.1:22018/devtoo..., se:cdpVersion: 85.0, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, userAgent: Mozilla/5.0 (Windows NT 10....}
-Element: [[FirefoxDriver: firefox on windows (39bbde07-2a7c-4561-9d05-acbd78a4c110)] -> xpath: //a[contains(@href, '#')]]
-Session ID: 39bbde07-2a7c-4561-9d05-acbd78a4c110
-at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
-at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
-at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
-at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
-at steps.generalSteps.clicAEnlace(generalSteps.java:193)
-at ✽.el usuario haga clic en el enlace "#"(file:///C:/Users/julen/eclipse-workspace/Practica2-TQS/src/test/java/features/IniciarSesión.feature:7)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.ElementNotInteractableException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:57:27 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-26T22:58:00 CET" duration-ms="32348" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Sesión guarda carrito"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Sesion guarda carrito"]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-26T22:58:00 CET" name="tearDownClass" finished-at="2024-12-26T22:58:00 CET" duration-ms="4" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:RunTests@5745ca0e]" started-at="2024-12-27T00:08:50 CET" name="tearDownClass" finished-at="2024-12-27T00:08:50 CET" duration-ms="3" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
