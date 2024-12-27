@@ -13,4 +13,4 @@
 - Java
 
 ## Objetivos del Proyecto
-El objetivo de la práctica es desarrollar un conjuto de pruebas automatizadas para testear la interfície de la página web de **IKEA España**.
+El objetivo de la práctica es desarrollar un conjunto de pruebas automatizadas para testear la interfície de la página web de **IKEA España**.
